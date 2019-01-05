@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../widgets/index.dart';
-import 'admin.dart';
 
-class HomePage extends StatelessWidget {
+import './home.dart';
+
+class AdminPage extends StatelessWidget {
+  @override
   Widget build(ctx) {
-    return Scaffold(
+    return  Scaffold(
       drawer: Drawer(
         child: Column(
           children: <Widget>[
@@ -13,18 +14,20 @@ class HomePage extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 title: Text('Choose')),
             ListTile(
-              title: Text('Administrator'),
+              title: Text('Home'),
               onTap: () {
                 Navigator.pushReplacement(ctx, MaterialPageRoute(builder: (ctx){
-                  return AdminPage();
+                    return HomePage();
                 }));
               },
             )
           ],
         ),
       ),
-      appBar: AppBar(title: Text('Home Page')),
-      body: HomeManager(),
+      appBar: AppBar(title: Text('Administrator')),
+      body: Center(
+        child: Text('Adminstrator'),
+      ),
     );
   }
 }
