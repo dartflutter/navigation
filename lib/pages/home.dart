@@ -15,9 +15,14 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text('Administrator'),
               onTap: () {
+                /* 
                 Navigator.pushReplacement(ctx, MaterialPageRoute(builder: (ctx){
                   return AdminPage();
                 }));
+                */
+
+                //因為在 MaterialApp 註冊了 name route 
+                Navigator.pushReplacementNamed(ctx, '/admin');
               },
             )
           ],

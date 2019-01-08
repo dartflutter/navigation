@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  final Map<String, String> item;
+  final Map<String, dynamic> item;
   final bool toDelete = true;
   DetailPage({this.item});
 
@@ -9,7 +9,6 @@ class DetailPage extends StatelessWidget {
   Widget build(ctx) {
     return WillPopScope(
       onWillPop: () {
-
         //注意: 在WillPopScope- onWillPop 中使用, Navigator.pop() 與 return Future 會互斥
         //也就是使用了 Navigator.pop , onWillPop 的回傳值就定要是 Future(false)
 
@@ -27,7 +26,7 @@ class DetailPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset(item['imgUrl']),
+            Image.asset("assets/" + item['imgUrl']),
             Container(
               padding: EdgeInsets.all(10.0),
               child: Text(item['title']),

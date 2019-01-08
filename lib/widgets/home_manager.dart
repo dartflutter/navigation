@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import '../pages/index.dart' as pages;
 
@@ -12,7 +13,8 @@ class HomeManagerState extends State<HomeManager> {
   @override
   void initState() {
     super.initState();
-    widget.imgs.add({"imgUrl": "assets/DSCN4069.jpg", "title": "Sweets 0"});
+    /**這裡不使用 assets/DSCN4069.jpg , 原因是在 onGenerateRoute 要split url segment會出問題 */
+    widget.imgs.add({"imgUrl": "DSCN4069.jpg", "title": "Sweets 0"});
   }
 
   @override
@@ -38,8 +40,7 @@ class HomeManagerState extends State<HomeManager> {
     );
   }
 
-  void _addImage(
-      {img: const {"imgUrl": 'assets/DSCN4064.jpg', "title": "Sweets"}}) {
+  void _addImage({img: const {"imgUrl": 'DSCN4064.jpg', "title": "Sweets"}}) {
     setState(() {
       widget.imgs.add({
         "title": img['title'] + " ${widget.imgs.length}",
@@ -59,7 +60,7 @@ class HomeManagerState extends State<HomeManager> {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset(img["imgUrl"]),
+          Image.asset("assets/" + img["imgUrl"]),
           Text(img["title"]),
           _buildButtonBar(ctx, img, index)
         ],
@@ -74,7 +75,7 @@ class HomeManagerState extends State<HomeManager> {
         FlatButton(
           textColor: Colors.blue,
           child: Text('Details'),
-          onPressed: () => Navigator.push<bool>(
+          /* onPressed: () => Navigator.push<bool>(
                 ctx,
                 MaterialPageRoute(
                   builder: (BuildContext context) =>
@@ -82,6 +83,15 @@ class HomeManagerState extends State<HomeManager> {
                 ),
               ).then((bool isDelete) {
                 if (isDelete) _deleteImage(index);
+              }),  */
+
+          onPressed: () =>
+          /**因為 detail 會回傳一個bool */
+              Navigator.pushNamed<bool>(ctx, '/detail/${jsonEncode(img)}')
+                  .then((bool isDelete) {
+                if (isDelete) {
+                  _deleteImage(index);
+                }
               }),
         ),
       ],
