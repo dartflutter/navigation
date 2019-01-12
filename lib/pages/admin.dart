@@ -40,11 +40,17 @@ class AdminPage extends StatelessWidget {
                   Navigator.pushNamed(ctx, '/notfound');
                 },
               ),
-              ListTile(title: Text('home'), onTap: () {
-                 Navigator.pushNamed(ctx,'/');
-                 }
-                 ),
-              ListTile(title: Text('link2'), onTap: () {}),
+              ListTile(
+                  title: Text('home'),
+                  onTap: () {
+                    Navigator.pushNamed(ctx, '/');
+                  }),
+              ListTile(
+                  title: Text('AdminPage2'),
+                  onTap: () {
+                    //這種用法用於測試用
+                    Navigator.push(ctx, AdminPage2());
+                  }),
             ],
           ),
         ),
@@ -65,4 +71,56 @@ class AdminPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class AdminPage2 extends MaterialPageRoute<void> {
+  AdminPage2()
+      : super(builder: (ctx) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(ctx).accentColor,
+              title: Text('AdminPage2'),
+              elevation: 1.0,
+            ),
+            body: Center(
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(ctx, AdminPage3());
+                },
+                child: Text("go to Admin Page3"),
+              ),
+            ),
+          );
+        } //builder
+            );
+}
+
+class AdminPage3 extends MaterialPageRoute<void> {
+  AdminPage3()
+      : super(builder: (ctx) {
+          return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(ctx).primaryColorDark,
+                title: Text('Admin Page3'),
+                elevation: 1.0,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                    },
+                  )
+                ],
+              ),
+              body: Center(
+                child: MaterialButton(
+                    onPressed: () {
+                      print(
+                          'Navigator.defaultRouteName = ${Navigator.defaultRouteName}');
+
+                      Navigator.pushNamed(ctx, Navigator.defaultRouteName);
+                    },
+                    child: Text('Go Home')),
+              ));
+        });
 }

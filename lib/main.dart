@@ -4,6 +4,11 @@ import './pages/index.dart' as pages;
 
 main() => runApp(App());
 
+final ThemeData _themeData = ThemeData(
+    brightness: Brightness.light,
+    primarySwatch: Colors.deepOrange,
+    accentColor: Colors.deepPurple);
+
 typedef Widget AppRoutes(BuildContext ctx);
 
 /*    '/' 即表示了 home , '/'是Flutter route保留給 home用的 */
@@ -37,12 +42,10 @@ MaterialPageRoute _gotoDefaultRoute(RouteSettings settings) {
 class App extends StatelessWidget {
   Widget build(ctx) {
     return MaterialApp(
-      theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.deepOrange,
-          accentColor: Colors.deepPurple),
+      theme: _themeData,
       /*  使用 routes 就不可以使用  home: pages.LoginPage() */
       routes: _routes,
+      
       onGenerateRoute: _onGenerateRoute,
 
       /* 當所有的Route都失效 (onRouteGenerate 回傳null時) */
