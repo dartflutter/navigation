@@ -25,7 +25,7 @@ class AdminPage extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   title: Text('Choose')),
               ListTile(
-                title: Text('模擬找不到頁面'),
+                title: Text('link404'),
                 onTap: () {
                   /*
                   Navigator.pushReplacement(ctx,
@@ -39,7 +39,12 @@ class AdminPage extends StatelessWidget {
 
                   Navigator.pushNamed(ctx, '/notfound');
                 },
-              )
+              ),
+              ListTile(title: Text('home'), onTap: () {
+                 Navigator.pushNamed(ctx,'/');
+                 }
+                 ),
+              ListTile(title: Text('link2'), onTap: () {}),
             ],
           ),
         ),
